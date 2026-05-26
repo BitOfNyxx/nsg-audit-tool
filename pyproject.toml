@@ -1,0 +1,39 @@
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[project]
+name = "nsg-audit-tool"
+version = "0.1.0"
+description = "Audit Azure Network Security Group rules for risky configurations."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { file = "LICENSE" }
+authors = [{ name = "Nyxx", email = "nyxx@bitofnyxx.me" }]
+keywords = ["azure", "nsg", "security", "audit", "network"]
+classifiers = [
+    "Development Status :: 2 - Pre-Alpha",
+    "Environment :: Console",
+    "Intended Audience :: System Administrators",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Security",
+]
+dependencies = []
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+]
+
+[project.scripts]
+nsg-audit = "nsg_audit_tool.cli:main"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/nsg_audit_tool"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
