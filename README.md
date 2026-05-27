@@ -22,8 +22,22 @@ Run the tests:
 pytest
 ```
 
-Invoke the CLI:
+## Usage
+
+Show the built-in help:
 
 ```bash
-nsg-audit
+nsg-audit --help
+```
+
+Print the version (sourced from package metadata):
+
+```bash
+nsg-audit --version
+```
+
+Pick an output format (`json` is the default; `csv` and `markdown` are also accepted):
+
+```bash
+nsg-audit --output-format markdown
 ```
