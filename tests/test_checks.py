@@ -13,7 +13,7 @@ class FakeRule:
     destination_port_ranges: list[str] | None = None
 
 
-def test_exposed_ssh_port():
+def test_inbound_ssh_from_internet_is_flagged():
     rule = FakeRule(
         source_address_prefix="0.0.0.0/0",
         destination_port_range="22",
@@ -22,7 +22,7 @@ def test_exposed_ssh_port():
     assert result is True
 
 
-def test_exposed_rdp_port():
+def test_inbound_rdp_from_wildcard_source_is_flagged():
     rule = FakeRule(
         source_address_prefix="*",
         destination_port_range="3389",
@@ -31,7 +31,7 @@ def test_exposed_rdp_port():
     assert result is True
 
 
-def test_smtp_is_not_exposed():
+def test_non_sensitive_port_from_internet_not_flagged():
     rule = FakeRule(
         source_address_prefix="*",
         destination_port_range="25",
@@ -66,7 +66,7 @@ def test_specific_ip_source_to_sensitive_port_not_flagged():
     assert result is False
 
 
-def test_not_exposed_sensitive_port():
+def test_rule_with_no_source_or_port_not_flagged():
     rule = FakeRule()
     result = is_internet_exposed_sensitive_port(rule)
     assert result is False
